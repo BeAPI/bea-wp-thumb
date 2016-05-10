@@ -1,5 +1,5 @@
 {
-  "name": "bea/wp-thumb",
+  "name": "bea/bea-wp-thumb",
   "description": "Remove XMLRPC from header, remove feature from WP",
   "minimum-stability": "stable",
   "license": "GPL-2.0",
