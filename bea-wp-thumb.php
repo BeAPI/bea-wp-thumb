@@ -67,20 +67,20 @@ add_action( 'wp_loaded', 'bea_fix_wpthumb_09_image_downsize' );
  * Force the image's path url to SSL on SSL protocol
  * When WP_CONTENT_URL or WP_SITEURL is set to http://
  *
- * @param $wp_upload_dir
+ * @param array $wp_upload_dir
  *
- * @return mixed
+ * @return array
  */
 function bea_force_image_ssl_url( $wp_upload_dir ) {
 	if ( ! is_ssl() ) {
 		return $wp_upload_dir;
 	}
 
-	if ( ! isset( $wp_upload_dir['baseurl'] ) ) {
+	if ( empty( $wp_upload_dir['baseurl'] ) ) {
 		return $wp_upload_dir;
 	}
 	$wp_upload_dir['baseurl'] = preg_replace( '/^http:/i', 'https:', $wp_upload_dir['baseurl'] );
 
 	return $wp_upload_dir;
 }
-add_action( 'upload_dir', 'bea_force_image_ssl_url' );
+add_filter( 'upload_dir', 'bea_force_image_ssl_url' );
