@@ -61,3 +61,26 @@ function bea_fix_wpthumb_09_image_downsize() {
 	return remove_filter( 'image_downsize', 'wpthumb_post_image', 99 );
 }
 add_action( 'wp_loaded', 'bea_fix_wpthumb_09_image_downsize' );
+
+/**
+ * Set the base url to HTTPS
+ * Force the image's path url to SSL on SSL protocol
+ * When WP_CONTENT_URL or WP_SITEURL is set to http://
+ *
+ * @param array $wp_upload_dir
+ *
+ * @return array
+ */
+function bea_force_image_ssl_url( $wp_upload_dir ) {
+	if ( ! is_ssl() ) {
+		return $wp_upload_dir;
+	}
+
+	if ( empty( $wp_upload_dir['baseurl'] ) ) {
+		return $wp_upload_dir;
+	}
+	$wp_upload_dir['baseurl'] = preg_replace( '/^http:/i', 'https:', $wp_upload_dir['baseurl'] );
+
+	return $wp_upload_dir;
+}
+add_filter( 'upload_dir', 'bea_force_image_ssl_url' );
