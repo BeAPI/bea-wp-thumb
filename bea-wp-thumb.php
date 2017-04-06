@@ -3,7 +3,7 @@
 Plugin Name:  BEA WP Thumb
 Description:  Prevent WP from generating resized images on upload
 Plugin URI:   http://www.beapi.fr
-Version:      1.0.1
+Version:      1.0.2
 Author:       BeAPI
 Author URI:   http://www.beapi.fr
 */
@@ -83,4 +83,4 @@ function bea_force_image_ssl_url( $wp_upload_dir ) {
 
 	return $wp_upload_dir;
 }
-add_filter( 'upload_dir', 'bea_force_image_ssl_url' );
+add_filter( 'upload_dir', 'bea_force_image_ssl_url', 15 );
