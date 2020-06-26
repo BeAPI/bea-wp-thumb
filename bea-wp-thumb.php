@@ -2,14 +2,14 @@
 /*
 Plugin Name:  BEA WP Thumb
 Description:  Prevent WP from generating resized images on upload
-Plugin URI:   http://www.beapi.fr
-Version:      1.0.2
-Author:       BeAPI
-Author URI:   http://www.beapi.fr
+Plugin URI:   https://beapi.fr
+Version:      1.0.3
+Author:       Be API
+Author URI:   https://beapi.fr
 */
 
 // prevent WP from generating resized images on upload
-add_filter( 'intermediate_image_sizes_advanced','bea_dynimg_image_sizes_advanced' );
+add_filter( 'intermediate_image_sizes_advanced', 'bea_dynimg_image_sizes_advanced' );
 function bea_dynimg_image_sizes_advanced( $sizes ) {
 	if ( ! class_exists( 'WP_Thumb' ) ) {
 		return $sizes;
@@ -22,9 +22,10 @@ function bea_dynimg_image_sizes_advanced( $sizes ) {
 
 	// Get all editor sizes
 	$default_sizes = apply_filters( 'image_size_names_choose', array(
-		'thumbnail' => __( 'Thumbnail' ),
-		'medium'    => __( 'Medium' ),
-		'large'     => __( 'Large' ),
+		'thumbnail'    => __( 'Thumbnail' ),
+		'medium'       => __( 'Medium' ),
+		'large'        => __( 'Large' ),
+		'medium_large' => __( 'Medium Large' ),
 	) );
 
 	foreach ( $default_sizes as $size => $name ) {
@@ -60,6 +61,7 @@ function bea_fix_wpthumb_09_image_downsize() {
 
 	return remove_filter( 'image_downsize', 'wpthumb_post_image', 99 );
 }
+
 add_action( 'wp_loaded', 'bea_fix_wpthumb_09_image_downsize' );
 
 /**
@@ -83,4 +85,5 @@ function bea_force_image_ssl_url( $wp_upload_dir ) {
 
 	return $wp_upload_dir;
 }
+
 add_filter( 'upload_dir', 'bea_force_image_ssl_url', 15 );
