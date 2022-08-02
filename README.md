@@ -6,6 +6,10 @@ The BEA WP Thumb prevents images generation
  
 ## Changelog ##
 
+### 1.0.4
+* 02 August 2022
+* Change composer/installers package constraint
+
 ### 1.0.3
 * 26 June 2020
 * Add medium_large default image size
